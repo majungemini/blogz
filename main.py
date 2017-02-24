@@ -20,9 +20,6 @@ class BlogHandler(webapp2.RequestHandler):
             The user parameter will be a User object.
         """
         query = Post.all().filter('author', user).order('-created')
-
-
-
         # TODO - filter the query so that only posts by the given user
         return query.fetch(limit=limit,offset=offset)
 
@@ -192,7 +189,8 @@ class SignupHandler(BlogHandler):
         if not email:
             return ""
 
-        EMAIL_RE = re.compile(r"^[\S]+@[\S]+.[\S]+$")
+        EMAIL_RE = re.compile(r'^[\S]+@[\S]+\.[\S]+$')
+                            # (r"^[\S]+@[\S]+.[\S]+$")
         if EMAIL_RE.match(email):
             return email
 
